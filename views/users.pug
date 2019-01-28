@@ -1,0 +1,40 @@
+doctype html
+html
+  include layout/head
+  body
+    include layout/navbar
+    .container-fluid
+      .row
+        include layout/sidebar
+        main.col-md-9.ml-sm-auto.col-lg-10.px-4(role='main')
+          .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
+            h1.h2 #{judul}
+          
+          form(method="post")
+            .form-group
+              label(for="name") * Name
+              input.form-control(type="text")
+            .form-group
+              label(for="name") * Department
+              input.form-control(type="text")
+            .form-group
+              label(for="name") * Location
+              input.form-control(type="text")
+            .form-group
+              .btn-group
+                input.btn.btn-success(type="submit" value="Save")
+                input.btn.btn-danger(type="reset" value="Reset")
+            br
+            br
+            .table-responsive
+              table.table.table-striped
+                thead
+                  tr
+                    th.col-md-1 No
+                    th.col-md-3 ID
+                    th.col-md-2 Name
+                    th.col-md-2 Department
+                    th.col-md-2 Location
+                    th.col-md-2 Action
+                tbody#userList
+        include layout/footer    
