@@ -10,16 +10,16 @@ html
           .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
             h1.h2 #{judul}
           
-          form(method="post")
+          form(method="post" action="")
             .form-group
               label(for="name") * Name
-              input.form-control(type="text")
+              input.form-control(type="text" name="name")
             .form-group
               label(for="name") * Department
-              input.form-control(type="text")
+              input.form-control(type="text" name="department")
             .form-group
               label(for="name") * Location
-              input.form-control(type="text")
+              input.form-control(type="text" name="location")
             .form-group
               .btn-group
                 input.btn.btn-success(type="submit" value="Save")
@@ -37,4 +37,21 @@ html
                     th.col-md-2 Location
                     th.col-md-2 Action
                 tbody#userList
-        include layout/footer    
+        script.
+          $(function(){
+              $.get("users/get", function(users){
+                  var startNumber = 1;
+                  for(var user in users){
+                      $("#userList").append("<tr>"+
+                          "<th>"+startNumber+"</th>"+
+                          "<th>"+users[user]._id+"</th>"+
+                          "<th>"+users[user].name+"</th>"+
+                          "<th>"+users[user].department+"</th>"+
+                          "<th>"+users[user].location+"</th>"+
+                          "<th><a href='users/edit/"+users[user]._id+"' class='badge badge-primary'>Edit</a> <a href='users/delete/"+users[user]._id+"' class='badge badge-danger'>Delete</a></th>"+
+                      "</tr>");
+                      startNumber++;
+                  }
+              }, "json");
+          });
+        include layout/footer

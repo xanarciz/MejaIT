@@ -1,13 +1,17 @@
+const createError = require('http-errors');
 const express = require("express");
-const bodyParser = require("body-parser");
+const path = require('path');
+const bodyParser = require('body-parser');
+
 const app = express();
 const mongoose = require("mongoose");
 
 app.set('view engine', 'pug');
 app.locals.pretty = true;
 app.use(express.static('public'));
+app.use(bodyParser());
 
-var mongoDB = "mongodb://localhost/db_mejait";
+const mongoDB = "mongodb://localhost/db_mejait";
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
@@ -18,6 +22,7 @@ var usersRoutes = require("./routes/users");
 
 app.use("/users", usersRoutes);
 
-app.listen(1999, () =>{
-  console.log("berjalan di port 1999");
+var port = 1999;
+app.listen(port, () =>{
+  console.log("berjalan di port " + port);
 });
