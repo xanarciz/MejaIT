@@ -39,7 +39,7 @@ class usersController {
     var find = this.id == 0 ? {} : {_id: this.id};
     usersModel.find(find, (err, users) => {
       res.json(users);
-    });
+    }).sort({department:"asc"});
   }
 }
 
