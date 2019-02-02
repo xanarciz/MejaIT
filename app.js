@@ -1,15 +1,18 @@
 const createError = require('http-errors');
 const express = require("express");
-const path = require('path');
-const bodyParser = require('body-parser');
+const path = require("path");
+const bodyParser = require("body-parser");
+const helmet = require("helmet");
 
 const app = express();
 const mongoose = require("mongoose");
+
 
 app.set('view engine', 'pug');
 app.locals.pretty = true;
 app.use(express.static('public'));
 app.use(bodyParser());
+app.use(helmet());
 
 const mongoDB = "mongodb://localhost/db_mejait";
 mongoose.connect(mongoDB, { useNewUrlParser: true });

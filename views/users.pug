@@ -12,14 +12,14 @@ html
           
           form(method="post" action="")
             .form-group
-              label(for="name") * Name
-              input.form-control(type="text" name="name")
+              label(for="name") * Name (alphabet only)
+              input.form-control(type="text" name="name" required maxlength="20" pattern="[a-zA-Z ]+")
             .form-group
               label(for="name") * Department
-              input.form-control(type="text" name="department")
+              input.form-control(type="text" name="department" required maxlength="20")
             .form-group
               label(for="name") * Location
-              input.form-control(type="text" name="location")
+              input.form-control(type="text" name="location" required maxlength="20")
             .form-group
               .btn-group
                 input.btn.btn-success(type="submit" value="Save")
@@ -49,7 +49,7 @@ html
                           "<th>"+users[user].department+"</th>"+
                           "<th>"+users[user].location+"</th>"+
                           "<th><a href='users/edit/"+users[user]._id+"' class='badge badge-primary'>Edit</a> <a href='users/delete/"+users[user]._id+"' class='badge badge-danger'>Delete</a></th>"+
-                      "</tr>");
+                      "</tr>").text();
                       startNumber++;
                   }
               }, "json");

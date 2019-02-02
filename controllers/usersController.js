@@ -1,7 +1,9 @@
 const express = require("express");
+const app = express();
 const bodyParser = require("body-parser");
 const usersModel = require("../models/usersModel");
 const usersRouter = "/users";
+const { check, validationResult } = require('express-validator/check');
 
 class usersController {
 
@@ -20,11 +22,14 @@ class usersController {
   }
 
   edit(req, res){
-    
+    usersModel.updateOne({_id: this.id}, {name: this.name, department: this.department, location: this.location}, (err) => {
+      if (err) return handleError(err);
+      res.redirect(usersRouter);
+    });
   }
 
   delete(req, res){
-    usersModel.remove({_id: this.id}, (err) => {
+    usersModel.deleteOne({_id: this.id}, (err) => {
       if (err) return handleError(err);
       res.redirect(usersRouter);
     });
