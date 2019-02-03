@@ -37,7 +37,8 @@ html
                     th.col-md-2 Location
                     th.col-md-2 Action
                 tbody#userList
-        script.
+    include layout/footer
+    script.
           $(function(){
               $.get("users/get", function(users){
                   var startNumber = 1;
@@ -54,4 +55,3 @@ html
                   }
               }, "json");
           });
-        include layout/footer

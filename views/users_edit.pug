@@ -24,7 +24,7 @@ html
               .btn-group
                 input.btn.btn-success(type="submit" value="Save")
                 input.btn.btn-danger(type="reset" value="Reset")
-        include layout/footer
+    include layout/footer
         script.
           $(function(){
               $.get("../get/#{id}", function(users){

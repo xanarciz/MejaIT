@@ -21,13 +21,13 @@ html
               .btn-group
                 input.btn.btn-success(type="submit" value="Save")
                 input.btn.btn-danger(type="reset" value="Reset")
-        include layout/footer
-        script.
-          $(function(){
-              $.get("../get/#{id}", function(its){
-                  for(var it in its){
-                      $("#name").val(its[it].name);
-                      $("#position").val(its[it].position);
-                  }
-              }, "json");
-          });
+    include layout/footer
+      script.
+        $(function(){
+            $.get("../get/#{id}", function(its){
+                for(var it in its){
+                    $("#name").val(its[it].name);
+                    $("#position").val(its[it].position);
+                }
+            }, "json");
+        });
