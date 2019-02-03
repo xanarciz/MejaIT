@@ -24,7 +24,7 @@ router.post("/",
     let departmentForm = req.body.department;
     let locationForm = req.body.location;
 
-    const errors = validationResult(req);
+    let errors = validationResult(req);
     
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
@@ -52,6 +52,7 @@ router.post("/edit/:id",
     check("location").isLength({min: 1}).withMessage("The name must be 1-20 chars long").escape(),
   ],
   function(req, res){
+    let getID = req.params.id;
     let nameForm = req.body.name;
     let departmentForm = req.body.department;
     let locationForm = req.body.location;
@@ -60,11 +61,10 @@ router.post("/edit/:id",
     
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
+    } else {
+      let users = new usersController(getID, nameForm, departmentForm, locationForm);
+      users.edit(req, res);
     }
-
-    getID = req.params.id;
-    let users = new usersController(getID, nameForm, departmentForm, locationForm);
-    users.edit(req, res);
   }
 );
 

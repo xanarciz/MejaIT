@@ -1,0 +1,54 @@
+doctype html
+html
+  include layout/head
+  body
+    include layout/navbar
+    .container-fluid
+      .row
+        include layout/sidebar
+        main.col-md-9.ml-sm-auto.col-lg-10.px-4(role='main')
+          .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
+            h1.h2 #{judul}
+          
+          form(method="post" action="")
+            .form-group
+              label(for="name") * Name (alphabet only)
+              input.form-control(type="text" name="name" required maxlength="20" pattern="[a-zA-Z ]+")
+            .form-group
+              label(for="position") * Position
+              input.form-control(type="text" name="position" required maxlength="20")
+            .form-group
+              .btn-group
+                input.btn.btn-success(type="submit" value="Save")
+                input.btn.btn-danger(type="reset" value="Reset")
+            br
+            br
+            .table-responsive
+              table.table.table-striped
+                thead
+                  tr
+                    th.col-md-1 No
+                    th.col-md-3 ID
+                    th.col-md-3 Name
+                    th.col-md-2 Position
+                    th.col-md-2 Action
+                tbody#itsList
+        script.
+          $(function(){
+              $.get("its/get", function(its){
+                  var startNumber = 1;
+                  for(var it in its){
+                      $("#itsList").append(
+                        "<tr>"+
+                          "<th>"+startNumber+"</th>"+
+                          "<th>"+its[it]._id+"</th>"+
+                          "<th>"+its[it].name+"</th>"+
+                          "<th>"+its[it].position+"</th>"+
+                          "<th><a href='its/edit/"+its[it]._id+"' class='badge badge-primary'>Edit</a> <a href='its/delete/"+its[it]._id+"' class='badge badge-danger'>Delete</a></th>"+
+                        "</tr>"
+                      );
+                      startNumber ++;
+                  }
+              }, "json");
+          });
+        include layout/footer

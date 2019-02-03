@@ -1,0 +1,33 @@
+doctype html
+html
+  include layout/head
+  body
+    include layout/navbar
+    .container-fluid
+      .row
+        include layout/sidebar
+        main.col-md-9.ml-sm-auto.col-lg-10.px-4(role='main')
+          .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
+            h1.h2 #{judul}
+          
+          form(method="post" action="")
+            .form-group
+              label(for="name") * Name (alphabet only)
+              input.form-control(type="text" name="name" id="name" required maxlength="20" pattern="[a-zA-Z ]+")
+            .form-group
+              label(for="position") * Position
+              input.form-control(type="text" name="position" id="position" required maxlength="20")
+            .form-group
+              .btn-group
+                input.btn.btn-success(type="submit" value="Save")
+                input.btn.btn-danger(type="reset" value="Reset")
+        include layout/footer
+        script.
+          $(function(){
+              $.get("../get/#{id}", function(its){
+                  for(var it in its){
+                      $("#name").val(its[it].name);
+                      $("#position").val(its[it].position);
+                  }
+              }, "json");
+          });
