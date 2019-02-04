@@ -46,7 +46,7 @@ html
                       $("#userList").append("<tr>"+
                           "<th>"+startNumber+"</th>"+
                           "<th>"+users[user]._id+"</th>"+
-                          "<th>"+users[user].name+"</th>"+
+                          "<th style='text-transform: capitalize'>"+users[user].name+"</th>"+
                           "<th>"+users[user].department+"</th>"+
                           "<th>"+users[user].location+"</th>"+
                           "<th><a href='users/edit/"+users[user]._id+"' class='badge badge-primary'>Edit</a> <a href='users/delete/"+users[user]._id+"' class='badge badge-danger'>Delete</a></th>"+

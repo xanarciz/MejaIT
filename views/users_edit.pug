@@ -13,7 +13,7 @@ html
           form(method="post" action="")
             .form-group
               label(for="name") * Name (alphabet only)
-              input.form-control(type="text" name="name" id="name" required maxlength="20" pattern="[a-zA-Z ]+")
+              input.form-control(type="text" name="name" id="name" style="text-transform: capitalize" required maxlength="20" pattern="[a-zA-Z ]+")
             .form-group
               label(for="department") * Department
               input.form-control(type="text" name="department" id="department" required maxlength="20")
