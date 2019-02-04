@@ -36,11 +36,19 @@ class usersController {
   }
 
   view(req, res){
-    var find = this.id == 0 ? {} : {_id: this.id};
+    let find = this.id == 0 ? {} : {_id: this.id};
     usersModel.find(find, (err, users) => {
       res.json(users);
     }).sort({department:"asc"});
   }
+  
+  search(req, res){
+    let find = {'name': new RegExp(this.name)};
+    usersModel.find(find, (err, users) => {
+      res.json(users);
+    }).sort({department:"asc"});
+  }
+
 }
 
 module.exports = usersController;

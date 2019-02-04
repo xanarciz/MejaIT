@@ -85,4 +85,10 @@ router.get("/get/:id", function(req, res){
   users.view(req, res);
 });
 
+router.get("/search/:find", function(req, res){
+  getFind = req.params.find;
+  let users = new usersController(0, getFind);
+  users.search(req, res);
+});
+
 module.exports = router;
