@@ -11,7 +11,7 @@ const mongoose = require("mongoose");
 app.set('view engine', 'pug');
 app.locals.pretty = true;
 app.use(express.static('public'));
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(helmet());
 
 const mongoDB = "mongodb://localhost/db_mejait";
