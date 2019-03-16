@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="http://localhost:1999/js/jquery.min.js"></script>
+    </head>
+    <body>
+        <form action="/" method="post">
+
+            <input list="browsers" id="search">
+
+            <datalist id="browsers">
+                <option value="andi">Andi</option>>
+            </datalist>
+            <span id="test">
+        </form>
+    </body>
+    <!--<script>
+        $(function(){
+            $("#search").keyup(function(){
+                $("#browsers").html("");
+                let user = $("#search").val();
+                $.get("http://localhost:1999/users/search/"+user, function(its){
+                    for(var it in its){
+                        $("#browsers").append(
+                            "<option value='"+its[it].name+"'>"
+                        );
+                    }
+                }, "json");
+            });
+        });
+    </script>-->
+</html>

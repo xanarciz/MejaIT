@@ -1,6 +1,3 @@
-const express = require("express");
-const app = express();
-const bodyParser = require("body-parser");
 const itsModel = require("../models/itsModel");
 const itsRouter = "/its";
 const { check, validationResult } = require('express-validator/check');
@@ -14,24 +11,44 @@ class itsController {
   }
 
   save(req, res){
-    itsModel.create({name: this.name, position: this.position}, (err) => {
-      if (err) return handleError(err);
-      res.redirect(itsRouter);
-    });
+    itsModel.create(
+      {
+        name: this.name,
+        position: this.position
+      },
+      (err) => {
+        if (err) return handleError(err);
+        res.redirect(itsRouter);
+      }
+    );
   }
 
   edit(req, res){
-    itsModel.updateOne({_id: this.id}, {name: this.name, position: this.position}, (err) => {
-      if (err) return handleError(err);
-      res.redirect(itsRouter);
-    });
+    itsModel.updateOne(
+      {
+        _id: this.id
+      }, 
+      {
+        name: this.name,
+        position: this.position
+      }, 
+      (err) => {
+        if (err) return handleError(err);
+        res.redirect(itsRouter);
+      }
+    );
   }
 
   delete(req, res){
-    itsModel.deleteOne({_id: this.id}, (err) => {
-      if (err) return handleError(err);
-      res.redirect(itsRouter);
-    });
+    itsModel.deleteOne(
+      {
+        _id: this.id
+      },
+      (err) => {
+        if (err) return handleError(err);
+        res.redirect(itsRouter);
+      }
+    );
   }
 
   view(req, res){

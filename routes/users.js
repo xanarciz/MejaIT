@@ -13,7 +13,7 @@ router.get("/", function(req, res){
 * Save user ke database
 *
 */
-router.post("/", 
+router.post("/",
   [
     check("name").isLength({min: 1, max: 20}).withMessage("The name must be 1-20 chars long").matches("[a-zA-Z ]+").withMessage("The name only contains alpahabet").escape(),
     check("department").isLength({min: 1, max:20}).withMessage("The name must be 1-20 chars long").escape(),
@@ -41,8 +41,7 @@ router.post("/",
 *
 */
 router.get("/edit/:id", function(req, res){
-  getID = req.params.id;
-  res.render("users_edit", {judul: "Edit User", id: getID});
+  res.render("users_edit", {judul: "Edit User", id: req.params.id});
 });
 
 router.post("/edit/:id",
@@ -69,7 +68,7 @@ router.post("/edit/:id",
 );
 
 router.get("/delete/:id", function(req, res){
-  getID = req.params.id;
+  let getID = req.params.id;
   let users = new usersController(getID);
   users.delete(req, res);
 });

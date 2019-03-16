@@ -1,9 +1,5 @@
-const express = require("express");
-const app = express();
-const bodyParser = require("body-parser");
 const usersModel = require("../models/usersModel");
 const usersRouter = "/users";
-const { check, validationResult } = require('express-validator/check');
 
 class usersController {
 

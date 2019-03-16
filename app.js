@@ -21,13 +21,18 @@ var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // Routes
-var usersRoutes = require("./routes/users");
-var itsRoutes = require("./routes/its");
+let dashboardRouter = require("./routes/dashboard");
+let usersRoutes = require("./routes/users");
+let itsRoutes = require("./routes/its");
+let tasksRouter = require("./routes/tasks"); 
 
+app.use("/", dashboardRouter);
+app.use("/dashboard", dashboardRouter);
 app.use("/users", usersRoutes);
 app.use("/its", itsRoutes);
+app.use("/tasks", tasksRouter);
 
-var port = 1999;
+let port = 1999;
 app.listen(port, () =>{
   console.log("berjalan di port " + port);
 });

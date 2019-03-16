@@ -9,8 +9,8 @@ router.get("/", function(req, res){
 
 router.post("/", 
   [
-     check("name").isLength({min: 1, max: 20}).withMessage("The name must be 1-20 chars long").matches("[a-zA-Z ]+").withMessage("The name only contains alpahabet").escape(),
-     check("position").isLength({min: 1, max: 20}).withMessage("The location must be 1-20 chars long").escape()
+    check("name").isLength({min: 1, max: 20}).withMessage("The name must be 1-20 chars long").matches("[a-zA-Z ]+").withMessage("The name only contains alpahabet").escape(),
+    check("position").isLength({min: 1, max: 20}).withMessage("The location must be 1-20 chars long").escape()
   ],
   function (req, res){
     let nameForm = req.body.name;
@@ -28,7 +28,7 @@ router.post("/",
 
 router.get("/edit/:id", function(req, res){
   let getID = req.params.id;
-  res.render("its_edit", {judul: "Edit IT"});
+  res.render("its_edit", {judul: "Edit IT", id: getID});
 });
 
 router.post("/edit/:id", 

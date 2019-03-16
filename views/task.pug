@@ -1,0 +1,104 @@
+doctype html
+html
+  include layout/head
+  body
+    include layout/navbar
+    .container-fluid
+      .row
+        include layout/sidebar
+        main.col-md-9.ml-sm-auto.col-lg-10.px-4(role='main')
+          .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
+            h1.h2 #{judul}
+          
+          form(method="post" action="")
+            .form-group
+              label(for="date") * Date
+              input.form-control(type="date" name="date" id="date" required)
+            .form-group
+              label(for="user") * User
+              select.form-control(type="text" name="user" id="user" required)
+                option
+            .form-group
+              label(for="description") * Description
+              input.form-control(type="text" name="description" required maxlength="100")
+            .form-group
+              label(for="remediation") * Remediation
+              input.form-control(type="text" name="remediation" required maxlength="100")
+            .form-group
+              label(for="rootcause") * Root Cause
+              input.form-control(type="text" name="rootcause" required maxlength="100")
+            .form-group
+              label(for="status") * Status
+              select.form-control(name="status" required)
+                option(value="done") Done
+                option(value="pending") Pending
+            .form-group
+              label(for="support") * Support by
+              select.form-control(type="text" name="support" id="support")
+            .form-group
+              .btn-group
+                input.btn.btn-success(type="submit" value="Save")
+                input.btn.btn-danger(type="reset" value="Reset")
+            br
+            br
+            .table-responsive
+              table.table.table-striped.table-responsive.table-hover(style="text-transform: capitalize;")
+                thead
+                  tr
+                    th No
+                    th Date
+                    th Username
+                    th Location
+                    th Department
+                    th Description
+                    th Remediation
+                    th Root Cause
+                    th Status
+                    th Support by
+                    th Action
+                tbody#tasksList
+    include layout/footer
+    script.
+          $(function(){
+              $.get("http://localhost:1999/users/get", function(users){
+                  for (var user in users){
+                    $("#user").append(
+                      "<option value='"+users[user]._id+"' style='text-transform: capitalize'>"+users[user].name+", "+users[user].department+", location : "+users[user].location+"</option>"
+                    );
+                  }
+              }, "json");
+              $.get("http://localhost:1999/its/get", function(its){
+                for (var it in its){
+                  $("#support").append(
+                    "<option value='"+its[it]._id+"'>"+its[it].name+"</option>"
+                  );
+                }
+              });
+          });
+
+          $("#date").change(function(){
+            let fullDate = $("#date").val();
+            let dateYM = fullDate.substr(0, 7);
+            $.get("http://localhost:1999/tasks/get?date="+dateYM, function(tasks){
+              var no = 1;
+              $("#tasksList").html("");
+              for (var task in tasks){
+                $("#tasksList").append(
+                  "<tr>"+
+                    "<th>"+no+"</td>"+
+                    "<th>"+tasks[task].date+"</th>"+
+                    "<th>"+tasks[task].user["name"]+"</th>"+
+                    "<th>"+tasks[task].user["location"]+"</th>"+
+                    "<th>"+tasks[task].user["department"]+"</th>"+
+                    "<th>"+tasks[task].description+"</th>"+
+                    "<th>"+tasks[task].remediation+"</th>"+
+                    "<th>"+tasks[task].rootCause+"</th>"+
+                    "<th>"+tasks[task].status+"</th>"+
+                    "<th>"+tasks[task].it["name"]+"</th>"+
+                    "<th><a href='http://localhost:1999/tasks/edit/"+tasks[task]._id+"' class='badge badge-info'>edit</a> <a href='tasks/delete/"+tasks[task]._id+"' class='badge badge-danger'>Delete</a></th>"+
+                  "</tr>"
+                );
+                no++;
+              }
+            })
+          });
